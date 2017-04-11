@@ -1,0 +1,53 @@
+
+public class CandidateCode {
+
+ 
+
+    public static int GetJumpCount(int input1,int input2,int[] input3)
+    {
+        
+      int counter=0;
+      int count=0;
+     
+      if(input1<=input2)
+      {
+    	  if(input3.length==1 && input3[0]<=input1)
+    	  {
+    		  return 1;
+    	  }
+    	  else
+    	  return 0;
+      }
+      for(int i=0;i<input3.length;i++)
+      {
+         counter=call(input1,input2,input3,i);
+         count+=counter;
+      }
+    
+      return count;
+     
+    }
+     private static int call(int input1, int input2, int[] input3, int i) {
+        
+        if(input3[i]<=input1)return 1;
+        input3[i]-=input1;
+        input3[i]+=input2;
+        return 1+call(input1, input2, input3, i);
+    }
+    public static void main(String[] args) throws IOException{
+            Scanner in = new Scanner(System.in);
+            int output = 0;
+            int ip1 = Integer.parseInt(in.nextLine().trim());
+            int ip2 = Integer.parseInt(in.nextLine().trim());
+            int ip3_size = 0;
+            ip3_size = Integer.parseInt(in.nextLine().trim());
+            int[] ip3 = new int[ip3_size];
+            int ip3_item;
+            for(int ip3_i = 0; ip3_i < ip3_size; ip3_i++) {
+                ip3_item = Integer.parseInt(in.nextLine().trim());
+                ip3[ip3_i] = ip3_item;
+            }
+            output = GetJumpCount(ip1,ip2,ip3);
+            System.out.println(String.valueOf(output));
+        }
+    }
